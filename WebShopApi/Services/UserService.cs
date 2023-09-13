@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Mail;
@@ -25,7 +26,7 @@ namespace WebShopApi.Services
             _mapper = mapper;
             _secretKey = config.GetSection("SecretKey");
         }
-        public TokenDto Login(LogInUserDto logInUserDto)
+        public string Login(LogInUserDto logInUserDto)
         {
             UserModel user = null;
             user = _dataContext.Users.FirstOrDefault(u => u.Email == logInUserDto.Email);
@@ -35,18 +36,27 @@ namespace WebShopApi.Services
             {
                 if (user.Type == Enums.Enums.UserType.Customer)
                 {
-                    claims.Add(new Claim(ClaimTypes.Role, "Customer"));
+                    claims.Add(new Claim("UserType", "Customer"));
                 }
                 else if (user.Type == Enums.Enums.UserType.Seller)
                 {
-                    claims.Add(new Claim(ClaimTypes.Role, "Seller"));
+                    claims.Add(new Claim("UserType", "Seller"));
                 }
                 else if (user.Type == Enums.Enums.UserType.Admin)
                 {
-                    claims.Add(new Claim(ClaimTypes.Role, "Admin"));
+                    claims.Add(new Claim("UserType", "Admin"));
                 }
 
-                claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Email));
+                claims.Add(new Claim("UserId", Convert.ToString(user.Id)));
+                claims.Add(new Claim("Email", user.Email));
+                claims.Add(new Claim("FirstName", user.FirstName));
+                claims.Add(new Claim("LastName", user.LastName));
+                claims.Add(new Claim("Password", user.Password));
+                claims.Add(new Claim("UserName", user.UserName));
+                claims.Add(new Claim("Birthday", Convert.ToString(user.Birthday)));
+                claims.Add(new Claim("Address", user.Address));
+                claims.Add(new Claim("Image", user.Picture));
+
 
                 SymmetricSecurityKey secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey.Value));
                 var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
@@ -60,7 +70,7 @@ namespace WebShopApi.Services
                 string tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
                 TokenDto token = new TokenDto { Token = tokenString };
 
-                return token;
+                return tokenString;
             }
             else
             {

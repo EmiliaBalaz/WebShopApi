@@ -32,7 +32,7 @@ namespace WebShopApi.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register(RegisterUserDto registerUserDto)
+        public IActionResult Register([FromBody]RegisterUserDto registerUserDto)
         {
             var returnValue = _userService.Register(registerUserDto);
             if(returnValue is null)

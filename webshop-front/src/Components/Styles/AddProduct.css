@@ -1,0 +1,140 @@
+.addproduct-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #e9cce0;
+  }
+  
+  .addproduct-form {
+    margin-top: 80px;
+    width: 400px;
+    padding: 40px;
+    background-color: #1a1a1a;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Add this line */
+    justify-content: center; /* Add this line */
+    text-align: center; /* Add this line */
+  }
+  
+  .title {
+    margin-top: 0;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #ff0099;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  input,
+  select {
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 3px;
+    background-color: #333333;
+    color: #ffffff;
+  }
+  
+  input::placeholder {
+    color: #aaaaaa;
+  }
+  
+  select option {
+    background-color: #333333;
+    color: #ffffff;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #ff0099;
+    color: #272727;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .button:hover {
+    background-color: #e681be;
+  }
+  
+  .error {
+    color: #ff0099;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .photo-container {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .photo-frame {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background-color: #333333;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .photo-frame::before {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
+  
+  .photo-label {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #272727;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+  }
+  
+  .photo-label:hover {
+    opacity: 1;
+  }
+  
+  .plus-icon {
+    font-size: 40px;
+    color: #ff0099;
+  }
+  
+  #photo-upload {
+    display: none;
+  }
+  .register-form p {
+    margin-bottom: 10px;
+  }
+  
+  .register-form .button {
+    margin-top: 20px;
+  }
+  

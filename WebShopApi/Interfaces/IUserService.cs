@@ -5,7 +5,7 @@ namespace WebShopApi.Interfaces
 {
     public interface IUserService
     {
-        public TokenDto Login(LogInUserDto logInUserDto);
+        public string Login(LogInUserDto logInUserDto);
         public UserDto Register(RegisterUserDto registerUserDto);
         public List<UserDto> GetAllUsers();
         public bool UpdateUser(UserDto updateUserDto);

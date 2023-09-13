@@ -11,7 +11,7 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
-
+string _cors = "cors";
 
 // Add services to the container.
 
@@ -61,6 +61,18 @@ builder.Services.AddAuthentication(opt=>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("moj_tajni_kljuc_token_login"))//navodimo privatni kljuc kojim su potpisani nasi tokeni
     };
 });
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: _cors, builder => {
+        builder.WithOrigins("https://localhost:3000")//Ovde navodimo koje sve aplikacije smeju kontaktirati nasu,u ovom slucaju nas Angular front
+               .AllowAnyHeader()
+               .AllowAnyMethod()
+               .SetIsOriginAllowed(origin => true)
+               .AllowCredentials();
+    });
+});
+
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("WebShopDatabase")));
 
 var mapperConfig = new MapperConfiguration(mc =>
@@ -84,6 +96,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(_cors);
 
 app.UseAuthorization();
 

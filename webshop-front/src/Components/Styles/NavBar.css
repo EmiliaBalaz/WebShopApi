@@ -1,0 +1,44 @@
+body, ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Style the navigation bar */
+.navbar {
+    background-color: #e9cce0; /* Background color */
+    padding: 10px 0; /* Add some padding to top and bottom */
+    text-align: center; /* Center-align the list items */
+}
+
+.nav-list {
+    display: flex; /* Display list items in a row */
+    justify-content: right; /* Center-align list items horizontally */
+    color: #ff0099
+}
+
+.spaceBetweenItems {
+    margin: 0 10px; /* Add spacing between list items */
+}
+
+.nav-list ul {
+    margin: 0 20px; /* Add spacing between list items */
+}
+
+.nav-list a {
+    text-decoration: none; /* Remove underlines from links */
+    color: #ff0099; /* Text color for links */
+    font-weight: bold; /* Make the text bold */
+    font-size: 16px; /* Set font size */
+}
+
+.nav-list a:hover {
+    color: #ff0099; /* Change text color on hover */
+}
+
+.myTitle{
+    text-decoration: none; /* Remove underlines from links */
+    color: #ff0099; /* Text color for links */
+    font-weight: bold; /* Make the text bold */
+    font-size: 24px; /* Set font size */
+}
