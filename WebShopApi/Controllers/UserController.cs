@@ -48,10 +48,10 @@ namespace WebShopApi.Controllers
             return Ok(_userService.GetAllUsers());
         }
 
-        [HttpPut("update")]
-        public IActionResult UpdateUser([FromBody]UserDto updateUserDto)
+        [HttpPut("update/{id}")]
+        public IActionResult UpdateUser([FromBody]UserDto updateUserDto, int id)
         {
-            return Ok(_userService.UpdateUser(updateUserDto));
+            return Ok(_userService.UpdateUser(updateUserDto, id));
         }
 
         [HttpDelete("delete")]

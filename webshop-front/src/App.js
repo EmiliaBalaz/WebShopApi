@@ -8,6 +8,8 @@ import AddProduct from './Components/AddProduct';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, Switch} from 'react-router-dom';
 import {PickRole} from './Services/ChooseYourRole' 
+import MyProfile from './Components/MyProfile';
+import EditProfile from './Components/EditProfile';
 
 
 function App (){
@@ -37,6 +39,15 @@ function App (){
                 </>
               )
             }
+            {
+              isLoggedIn &&
+              (
+                <>
+                <Link to="/myProfile" className='spaceBetweenItems'>My profile</Link>
+                <Link to="/editProfile" className='spaceBetweenItems'>Edit profile</Link>
+                </>
+              )
+            }
           </ul>
         </li>
       </nav>
@@ -46,6 +57,18 @@ function App (){
         {isLoggedIn &&
           (
             <Route path="/addProduct" element={<AddProduct/>} />
+          )
+        }
+        {
+          isLoggedIn &&
+          (
+            <Route path="/myProfile" element={<MyProfile/>} />
+          )
+        }
+        {
+          isLoggedIn &&
+          (
+            <Route path="/editProfile" element={<EditProfile/>} />
           )
         }
       </Routes>

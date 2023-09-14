@@ -43,22 +43,20 @@ const AddProduct = () => {
         }
         
 
-        // Set errors or submit form
         if (Object.keys(validationErrors).length > 0)
         {
             setErrors(validationErrors);
         }
         else
         {
-            try {
-                // Send the registration data to the server
+            try 
+            {
                 const response = await axios.post('https://localhost:7042/api/Product/add', data);
                 console.log('Adding product is successful', response.data);
-                // Handle successful registration (e.g., redirect user)
-              } catch (error) {
+            } catch (error)
+            {
                 console.error('Adding product is failed', error);
-                // Handle registration failure (e.g., display error message)
-              }
+            }
             
         }
     }

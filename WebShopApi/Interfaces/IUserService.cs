@@ -8,7 +8,7 @@ namespace WebShopApi.Interfaces
         public string Login(LogInUserDto logInUserDto);
         public UserDto Register(RegisterUserDto registerUserDto);
         public List<UserDto> GetAllUsers();
-        public bool UpdateUser(UserDto updateUserDto);
+        public bool UpdateUser(UserDto updateUserDto, int id);
         public bool DeleteUser(string email);
         public UserDto FindById(string email);
 

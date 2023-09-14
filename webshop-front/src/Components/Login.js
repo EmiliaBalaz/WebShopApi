@@ -25,7 +25,6 @@ const Login = ({handleLogin}) =>
             validationErrors.password = 'Password is required';
         }
         
-        // Set errors or submit form
     if (Object.keys(validationErrors).length > 0)
     {
         setErrors(validationErrors);

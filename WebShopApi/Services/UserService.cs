@@ -47,7 +47,7 @@ namespace WebShopApi.Services
                     claims.Add(new Claim("UserType", "Admin"));
                 }
 
-                claims.Add(new Claim("UserId", Convert.ToString(user.Id)));
+                claims.Add(new Claim("Id", Convert.ToString(user.Id)));
                 claims.Add(new Claim("Email", user.Email));
                 claims.Add(new Claim("FirstName", user.FirstName));
                 claims.Add(new Claim("LastName", user.LastName));
@@ -115,9 +115,18 @@ namespace WebShopApi.Services
             return listOfUsers;
         }
 
-        public bool UpdateUser(UserDto updateUserDto)
+        public bool UpdateUser(UserDto updateUserDto, int id)
         {
-            UserModel user = _mapper.Map<UserModel>(updateUserDto);
+            UserModel user = _dataContext.Users.Find(id);
+            //_mapper.Map<UserModel>(updateUserDto);
+
+            user.UserName = updateUserDto.UserName;
+            user.FirstName = updateUserDto.FirstName;
+            user.LastName = updateUserDto.LastName;
+            user.Email = updateUserDto.Email;
+            user.Birthday= updateUserDto.Birthday;
+            user.Address= updateUserDto.Address;
+
             _dataContext.Users.Update(user);
             _dataContext.SaveChanges();
             return true;

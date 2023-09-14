@@ -1,6 +1,6 @@
 export class User {
     constructor(
-      UserId=0,
+      Id=0,
       UserName="",
       Password="",
       FirstName="",
@@ -11,7 +11,7 @@ export class User {
       Photo="",
       UserType=1
     ) {
-      this.userId=UserId;
+      this.Id=Id;
       this.userName = UserName;
       this.password = Password;
       this.firstName = FirstName;
