@@ -8,7 +8,7 @@ import User from '../Models/User.js'
     const decodedToken = jwtDecode(token);
 
     // Extract the claims from the decoded token
-    const {UserId, UserName, Password, FirstName, LastName,Birthday, Address,Email,Image,UserType} = decodedToken;
+    const {UserId, UserName, Password, FirstName, LastName,Birthday, Address,Email,Image,UserType, Veryfied} = decodedToken;
     var bool;
 
     
@@ -24,6 +24,7 @@ import User from '../Models/User.js'
       Email, 
       Image,
       UserType,
+      Veryfied,
     );
     sessionStorage.setItem("User", JSON.stringify(user));
     sessionStorage.setItem("Token",JSON.stringify(token));

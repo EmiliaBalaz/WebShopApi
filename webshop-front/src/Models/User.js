@@ -9,7 +9,8 @@ export class User {
       Address="",
       Email="",
       Photo="",
-      UserType=1
+      UserType=1,
+      Veryfied,
     ) {
       this.Id=Id;
       this.userName = UserName;
@@ -21,6 +22,7 @@ export class User {
       this.email = Email;
       this.photo = Photo;
       this.userType = UserType;
+      this.veryfied = Veryfied;
     }
   }
   export default User;

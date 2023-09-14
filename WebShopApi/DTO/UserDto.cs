@@ -14,5 +14,6 @@ namespace WebShopApi.DTO
         public UserType Type { get; set; }
         public DateTime Birthday { get; set; }
         public string Picture { get; set; }
+        public VeryfiedType Veryfied { get; set; }
     }
 }

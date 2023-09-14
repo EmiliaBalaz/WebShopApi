@@ -56,6 +56,7 @@ namespace WebShopApi.Services
                 claims.Add(new Claim("Birthday", Convert.ToString(user.Birthday)));
                 claims.Add(new Claim("Address", user.Address));
                 claims.Add(new Claim("Image", user.Picture));
+                claims.Add(new Claim("Veryfied", Convert.ToString(user.Veryfied)));
 
 
                 SymmetricSecurityKey secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey.Value));
@@ -91,7 +92,8 @@ namespace WebShopApi.Services
             _registerUserDto.Birthday = registerUserDto.Birthday;
             _registerUserDto.Address= registerUserDto.Address;
             _registerUserDto.Picture= registerUserDto.Photo;
-            _registerUserDto.Type = UserType.Customer;
+            _registerUserDto.Type = UserType.Seller;
+            _registerUserDto.Veryfied = VeryfiedType.Denied;
 
             userModel = _mapper.Map<UserModel>(_registerUserDto);
 

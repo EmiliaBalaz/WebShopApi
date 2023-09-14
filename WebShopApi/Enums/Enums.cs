@@ -8,5 +8,12 @@
             Customer = 1,
             Seller = 2,
         }
+
+        public enum VeryfiedType
+        {
+            Approved = 0,
+            Denied = 1,
+            InProgress = 2,
+        }
     }
 }

@@ -34,5 +34,8 @@ namespace WebShopApi.DTO
 
         [Required(ErrorMessage = "The field with name {0} is required.")]
         public UserType Type { get; set; }
+
+        [Required(ErrorMessage = "The field with name {0} is required.")]
+        public VeryfiedType Veryfied { get; set; }
     }
 }

@@ -42,7 +42,9 @@ namespace WebShopApi.Migrations
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false),
-                    Picture = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Picture = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Veryfied = table.Column<int>(type: "int", nullable: false),
+                    AcceptedRegistration = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

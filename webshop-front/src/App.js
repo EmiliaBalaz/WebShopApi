@@ -9,7 +9,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, Switch} from 'react-router-dom';
 import {PickRole} from './Services/ChooseYourRole' 
 import MyProfile from './Components/MyProfile';
-import EditProfile from './Components/EditProfile';
+import VerifySeller from './Components/VerifySeller';
 
 
 function App (){
@@ -48,6 +48,13 @@ function App (){
                 </>
               )
             }
+            {isLoggedIn && PickRole().isAdmin===true &&
+              (
+                <>
+                <Link to="/verifySeller" className='spaceBetweenItems'>Verify seller</Link>
+                </>
+              )
+            }
           </ul>
         </li>
       </nav>
@@ -68,7 +75,7 @@ function App (){
         {
           isLoggedIn &&
           (
-            <Route path="/editProfile" element={<EditProfile/>} />
+            <Route path="/verifySeller" element={<VerifySeller/>} />
           )
         }
       </Routes>

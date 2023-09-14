@@ -12,7 +12,7 @@ using WebShopApi.Data;
 namespace WebShopApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230908122354_MyFirstMigration")]
+    [Migration("20230914155007_MyFirstMigration")]
     partial class MyFirstMigration
     {
         /// <inheritdoc />
@@ -66,6 +66,9 @@ namespace WebShopApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("AcceptedRegistration")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -99,6 +102,9 @@ namespace WebShopApi.Migrations
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Veryfied")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
