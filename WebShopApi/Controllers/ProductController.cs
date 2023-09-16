@@ -40,7 +40,7 @@ namespace WebShopApi.Controllers
             return Ok(_productService.UpdateProduct(product, id));
         }
 
-        [HttpGet("find")]
+        [HttpGet("find/{id}")]
         public IActionResult FindById(long id)
         {
             return Ok(_productService.FindById(id));

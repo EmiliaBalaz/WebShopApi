@@ -1,6 +1,6 @@
 export class Product {
     constructor(
-      ProductId=0,
+      Id=0,
       Name="",
       Price=0,
       Quantity=1,
@@ -8,7 +8,7 @@ export class Product {
       Image=""
       
     ) {
-      this.productId=ProductId;
+      this.id=Id;
       this.name=Name;
       this.price=Price;
       this.quantity=Quantity;

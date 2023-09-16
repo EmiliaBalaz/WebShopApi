@@ -4,6 +4,7 @@ namespace WebShopApi.DTO
 {
     public class ProductDto
     {
+        public long Id { get; set; }
         [Required(ErrorMessage = "The field with name {0} is required.")]
         public string Name { get; set; }
         [Required(ErrorMessage = "The field with name {0} is required.")]

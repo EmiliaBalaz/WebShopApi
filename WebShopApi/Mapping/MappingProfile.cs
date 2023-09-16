@@ -10,6 +10,7 @@ namespace WebShopApi.Mapping
         {
             CreateMap<UserModel, UserDto>().ReverseMap();
             CreateMap<ProductModel, ProductDto>().ReverseMap();
+            CreateMap<OrderModel, OrderDto>().ReverseMap();
         }
     }
 }

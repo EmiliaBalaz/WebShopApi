@@ -92,7 +92,7 @@ namespace WebShopApi.Services
             _registerUserDto.Birthday = registerUserDto.Birthday;
             _registerUserDto.Address= registerUserDto.Address;
             _registerUserDto.Picture= registerUserDto.Photo;
-            _registerUserDto.Type = UserType.Seller;
+            _registerUserDto.Type = UserType.Customer;
             _registerUserDto.Veryfied = VeryfiedType.Denied;
 
             userModel = _mapper.Map<UserModel>(_registerUserDto);

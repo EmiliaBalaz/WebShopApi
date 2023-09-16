@@ -10,10 +10,13 @@ import { BrowserRouter as Router, Routes, Route, Link, Switch} from 'react-route
 import {PickRole} from './Services/ChooseYourRole' 
 import MyProfile from './Components/MyProfile';
 import VerifySeller from './Components/VerifySeller';
+import Home from './Components/Home'
+import CustomersOrders from './Components/CustomersOrders';
 
 
 function App (){
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [chartItems,setChartItems]=useState([]);
   const handleLogin = () => {
     // Perform login logic and set isLoggedIn to true
     setIsLoggedIn(true);
@@ -22,8 +25,9 @@ function App (){
     <Router>
       <nav className='navbar'>
         <p className='myTitle'>Food delivery</p>
-        <li className="nav-list">
+        <li className="nav-list">   
           <ul>
+          <Link to="/home" className="nav-link">Home</Link>
             {!isLoggedIn &&
               (
                 <>
@@ -55,10 +59,18 @@ function App (){
                 </>
               )
             }
+            {isLoggedIn && PickRole().isCustomer===true &&
+              (
+                <>
+                <Link to="/customersOrders" className='spaceBetweenItems'>Create order</Link>
+                </>
+              )
+            }
           </ul>
         </li>
       </nav>
       <Routes>
+        <Route path="/home" element={<Home isLoggedIn={isLoggedIn} setChartItems={setChartItems} chartItems={chartItems}/>}/>
         <Route path="/login" element={<Login handleLogin={handleLogin}/>}/>
         <Route path="/register" element={<Register/>}></Route>
         {isLoggedIn &&
@@ -76,6 +88,12 @@ function App (){
           isLoggedIn &&
           (
             <Route path="/verifySeller" element={<VerifySeller/>} />
+          )
+        }
+        {
+          isLoggedIn &&
+          (
+            <Route path="/customersOrders" element={<CustomersOrders setChartItems={setChartItems} chartItems={chartItems} isLoggedIn={isLoggedIn}/>} />
           )
         }
       </Routes>
