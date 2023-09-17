@@ -15,8 +15,7 @@ namespace WebShopApi.Models
         public string Address { get; set; }
         public DateTime Birthday { get; set; }
         public UserType Type { get; set; }
-        public string Picture { get; set; }
+        public string Photo { get; set; }
         public VeryfiedType Veryfied { get; set; }
-        public bool AcceptedRegistration { get; set; }
     }
 }

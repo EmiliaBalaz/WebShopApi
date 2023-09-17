@@ -17,37 +17,12 @@ namespace WebShopApi.Controllers
             _orderService = orderService;
         }
 
-        [HttpPost("add")]
-        public IActionResult AddOrder(OrderDto newOrder)
+        [HttpPost("addorder")]
+        public IActionResult AddOrder([FromBody]OrderDto newOrder)
         {
-            var result = _orderService.AddOrder(newOrder);
-            if(result is null)
-            {
-                BadRequest("Adding product is failed.");
-            }
-            return Ok(result);
+            
+            return Ok(_orderService.AddOrder(newOrder));
         }
 
-        [HttpPost("addtochart")]
-        public IActionResult AddProductToChart(ProductDto product)
-        {
-            var result = _orderService.AddProductToChart(product);
-            if (result is null)
-            {
-                BadRequest("Adding product to chart is failed.");
-            }
-            return Ok(result);
-        }
-
-        [HttpGet("getchart")]
-        public IActionResult GetFromChart()
-        {
-            var result = _orderService.GetFromChart();
-            if (result is null)
-            {
-                BadRequest("Getting product from  chart is failed.");
-            }
-            return Ok(result);
-        }
     }
 }

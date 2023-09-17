@@ -11,7 +11,7 @@ namespace WebShopApi.Interfaces
         public bool UpdateUser(UserDto updateUserDto, int id);
         public bool DeleteUser(string email);
         public UserDto FindById(string email);
-
         public bool AddUsersPicture(string email, string path);
+        string getPhoto(int id);
     }
 }

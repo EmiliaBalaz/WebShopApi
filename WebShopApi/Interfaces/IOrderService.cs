@@ -6,8 +6,5 @@ namespace WebShopApi.Interfaces
     {
          OrderDto AddOrder(OrderDto newOrder);
 
-        ProductDto AddProductToChart(ProductDto newProduct);
-
-        ProductDto GetFromChart();
     }
 }

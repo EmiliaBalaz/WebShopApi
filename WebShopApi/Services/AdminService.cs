@@ -27,7 +27,6 @@ namespace WebShopApi.Services
                 return false;
             }
 
-            user.AcceptedRegistration = true;
 
             _dataContext.Users.Update(user);
             _dataContext.SaveChanges();

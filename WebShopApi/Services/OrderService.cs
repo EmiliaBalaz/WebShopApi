@@ -19,6 +19,20 @@ namespace WebShopApi.Services
 
         public OrderDto AddOrder(OrderDto newOrder)
         {
+            List<ProductModel> productsFromFront =  _mapper.Map<List<ProductModel>>(newOrder.Products);
+            List<ProductModel> productsFromDatabase = _dataContext.Products.ToList();
+            List<OrderProductModel> orderProducts= new List<OrderProductModel>();
+
+            foreach (ProductModel product in productsFromFront)
+            {
+                ProductModel matchingProduct = _dataContext.Products.Find(product.Id);
+                if (matchingProduct != null)
+                {
+                    DecreaseQuantity(matchingProduct.Id, product.Quantity);
+                    orderProducts.Add(new OrderProductModel() { OrderId = matchingProduct.Id, Product = matchingProduct, Quantity = product.Quantity });
+                }
+            }
+
             Random random = new Random();
             DateTime now = DateTime.Now;
             DateTime nextTime = now.AddDays(15);
@@ -28,34 +42,28 @@ namespace WebShopApi.Services
 
             OrderModel order = new OrderModel();
 
-            order.OrderId = newOrder.OrderId;
             order.Address = newOrder.Address;
             order.Price = newOrder.Price;
             order.OrderDate = newOrder.OrderDate;
             order.Comment= newOrder.Comment;
             order.ShipmentDate = randomTime;
+            order.OrderProducts = orderProducts;
+            foreach (OrderProductModel op in orderProducts)
+            {
+                op.Order = order;
+            }
 
             _dataContext.Add(order);
             _dataContext.SaveChanges();
             return _mapper.Map<OrderDto>(order);
         }
 
-        public ProductDto AddProductToChart(ProductDto newProduct)
+        private void DecreaseQuantity(int id, int quantity)
         {
-            ProductModel productModel = new ProductModel();
-            productModel.Description = "Proizvod za korpu";
-            productModel = _mapper.Map<ProductModel>(newProduct);
-            _dataContext.Products.Add(productModel);
+            ProductModel product = _dataContext.Products.Find(id);
+            product.Quantity -= quantity;
             _dataContext.SaveChanges();
-            return _mapper.Map<ProductDto>(productModel);
-        }
 
-        public ProductDto GetFromChart()
-        {
-            string description = "Proizvod za korpu";
-            ProductModel productModel = _dataContext.Products.Find(description);
-            ProductDto productDto = _mapper.Map<ProductDto>(productModel);
-            return productDto;
         }
     }
 }

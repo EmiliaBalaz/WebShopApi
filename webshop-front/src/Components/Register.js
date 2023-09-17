@@ -13,9 +13,9 @@ const Register = () => {
     const [passwordVerify, setRepeatPassword] = useState('');
     const [address, setAddress] = useState('');
     const [birthday, setDateOfBirth] = useState('');
-    const [userType, setUserType] = useState(1);
+    const [type, setUserType] = useState(1);
     const [errors, setErrors] = useState({});
-    const [photo, setPhoto] = useState('');
+    const [photo, setPhoto] = useState(null);
 
     const data = {
         firstName,
@@ -27,7 +27,7 @@ const Register = () => {
         birthday,
         address,
         photo,
-        userType,
+        type,
     };
 
     const handleSubmit = async (e) => {
@@ -62,9 +62,6 @@ const Register = () => {
         if (!birthday) {
           validationErrors.birthday = 'Date of Birth is required';
         }
-        if (!photo) {
-            validationErrors.photo = 'Date of photo is required';
-          }
 
         // Set errors or submit form
         if (Object.keys(validationErrors).length > 0)
@@ -73,19 +70,47 @@ const Register = () => {
         }
         else
         {
-            try {
-                // Send the registration data to the server
-                const response = await axios.post('https://localhost:7042/api/User/register', data);
-                console.log('Registration successful', response.data);
-                navigate('/login');
-                // Handle successful registration (e.g., redirect user)
-              } catch (error) {
-                console.error('Registration failed', error);
-                // Handle registration failure (e.g., display error message)
-              }
+          if (photo) {
+            const reader = new FileReader();
+            const filePromise = new Promise((resolve) => {
+              reader.onloadend = () => {
+                const photoString = reader.result;
+                data.photo = photoString;
+                resolve(); // Resolve the promise once the image string is set
+              };
+            });
+            reader.readAsDataURL(photo);
+  
+            await filePromise; // Wait for the promise to be resolved
+
+            var res=await sendRequest(data);
+        
+        
+        navigate('/login');
+          
+        }
+        else{
+          alert(res.data);
+          console.log(res.data);
+          console.log(typeof res.data)
+        }     
             
         }
     }
+
+    const sendRequest = async (data) => {
+      return await axios.post('https://localhost:7042/api/User/register', data);
+    };
+
+    const photoFrameRef = useRef(null);
+  const handlePhotoChange = (e) => {
+    const file = e.target.files[0];
+    setPhoto(file);
+
+    const photoURL = URL.createObjectURL(file);
+    // Set the URL as the background image of the photo frame
+    photoFrameRef.current.style.backgroundImage = `url(${photoURL})`;
+  };
     
     return(
         <div className="register-container">
@@ -168,26 +193,33 @@ const Register = () => {
             />
             {errors.address && <p className="error">{errors.address}</p>}
           </div>
-          
-          <div className="form-group">
-            <input
-              type="text"
-              placeholder="Image"
-              value={photo}
-              onChange={(e) => setPhoto(e.target.value)}
-            />
-            {errors.photo && <p className="error">{errors.photo}</p>}
-          </div>
+        
           <div className="form-group">
             <input
               type="text"
               placeholder="Role"
-              value={userType}
+              value={type}
               onChange={(e) => setUserType(e.target.value)}
             />
-            {errors.userType && <p className="error">{errors.userType}</p>}
+            {errors.type && <p className="error">{errors.type}</p>}
           </div>
-            
+          <div className="form-group">
+            <p></p>
+            <label htmlFor="photo-upload">Set Profile Photo:</label>
+            <div className="photo-container">
+              <div className="photo-frame" ref={photoFrameRef}>
+                <label htmlFor="photo-upload" className="photo-label">
+                  <span className="plus-icon">+</span>
+                </label>
+              </div>
+              <input
+                type="file"
+                id="photo-upload"
+                accept="image/*"
+                onChange={handlePhotoChange}
+              />
+            </div>
+          </div>  
           <button type="submit">Register</button>
         </form>
       </div>

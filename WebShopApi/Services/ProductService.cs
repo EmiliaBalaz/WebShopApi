@@ -24,7 +24,7 @@ namespace WebShopApi.Services
             return _mapper.Map<ProductDto>(productModel);
         }
 
-        public bool DeleteProduct(long id)
+        public bool DeleteProduct(int id)
         {
             ProductModel productModel = _dataContext.Products.Find(id);
 
@@ -37,7 +37,7 @@ namespace WebShopApi.Services
             _dataContext.SaveChanges();
             return true;
         }
-        public bool UpdateProduct(ProductDto product, long id)
+        public bool UpdateProduct(ProductDto product, int id)
         {
             ProductModel productModel = _dataContext.Products.Find(id);
 
@@ -52,7 +52,7 @@ namespace WebShopApi.Services
             return true;
         }
 
-        public ProductDto FindById(long id)
+        public ProductDto FindById(int id)
         {
             ProductModel productModel = _dataContext.Products.Find(id);
             ProductDto productDto = _mapper.Map<ProductDto>(productModel);

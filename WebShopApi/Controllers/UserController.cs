@@ -109,5 +109,12 @@ namespace WebShopApi.Controllers
         {
             return this._environment.WebRootPath + "\\Resources\\Images";
         }
+
+        [HttpGet("photo/{id}")]
+        public IActionResult getPhoto(int id)
+        {
+
+            return Ok(_userService.getPhoto(id));
+        }
     }
 }

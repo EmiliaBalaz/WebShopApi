@@ -13,7 +13,7 @@ namespace WebShopApi.DTO
         public string Address { get; set; }
         public UserType Type { get; set; }
         public DateTime Birthday { get; set; }
-        public string Picture { get; set; }
+        public string Photo { get; set; }
         public VeryfiedType Veryfied { get; set; }
     }
 }

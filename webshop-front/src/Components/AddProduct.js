@@ -5,21 +5,42 @@ import { Product } from '../Models/Product';
 
 const AddProduct = () => {
   
+    const user = JSON.parse(sessionStorage["User"]);
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [quantity, setQuantity] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
     const [errors, setErrors] = useState({});
+    const [newProduct, setNewProduct] = useState(new Product(0, "",  0, 1, "","", user.id));
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [products, setProducts] = useState([]);
+    const [sellerId, setSellerId] = useState('');
+
 
     const data = {
         name,
         price,
         quantity,
         description,
-        image
+        image,
+        sellerId,
     };
     
+    const handleAddProduct = async() =>
+    {
+      try 
+      {
+          data.sellerId = user.id;
+          const response = await axios.post('https://localhost:7042/api/Product/add', data);
+          console.log('Adding product is successful', response.data);
+          setProducts((prevProducts) => [...prevProducts, response.data]);
+          setNewProduct(new Product(0, "",  0, 1, "","", user.id));
+      } catch (error)
+      {
+          console.error('Adding product is failed', error);
+      }
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -41,25 +62,31 @@ const AddProduct = () => {
         if (!image) {
           validationErrors.image = 'Image is required';
         }
-        
-
-        if (Object.keys(validationErrors).length > 0)
-        {
-            setErrors(validationErrors);
-        }
-        else
-        {
-            try 
-            {
-                const response = await axios.post('https://localhost:7042/api/Product/add', data);
-                console.log('Adding product is successful', response.data);
-            } catch (error)
-            {
-                console.error('Adding product is failed', error);
-            }
-            
-        }
+      
     }
+
+    const handleImageUpload = (e) => {
+      try{
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (selectedProduct) {
+          setSelectedProduct((prevProduct) => ({
+            ...prevProduct,
+            image: reader.result,
+          }));
+        } else {
+          setNewProduct((prevProduct) => ({
+            ...prevProduct,
+            image: reader.result,
+          }));
+        }
+      };
+      reader.readAsDataURL(file);
+
+  }
+  catch(error){}
+    };
 
     return(
         <div className="addproduct-container">
@@ -103,17 +130,20 @@ const AddProduct = () => {
             {errors.description && <p className="error">{errors.description}</p>}
           </div>
           <div className="form-group">
-            <input
-              type="text"
-              placeholder="Image"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-            />
-            {errors.image && (
-              <p className="error">{errors.image}</p>
-            )}
+          <label htmlFor="image">Image:</label>
+          <div className="image-preview">
+            {newProduct.image && <img src={newProduct.image} alt="Product Preview" />}
           </div>
-          <button type="submit">Add</button>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            accept="image/*"
+            onChange={handleImageUpload}
+          />
+        </div>
+
+          <button type="submit" onClick={handleAddProduct}>Add</button>
         </form>
       </div>
     </div>

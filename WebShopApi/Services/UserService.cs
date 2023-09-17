@@ -55,7 +55,6 @@ namespace WebShopApi.Services
                 claims.Add(new Claim("UserName", user.UserName));
                 claims.Add(new Claim("Birthday", Convert.ToString(user.Birthday)));
                 claims.Add(new Claim("Address", user.Address));
-                claims.Add(new Claim("Image", user.Picture));
                 claims.Add(new Claim("Veryfied", Convert.ToString(user.Veryfied)));
 
 
@@ -91,8 +90,8 @@ namespace WebShopApi.Services
             _registerUserDto.UserName = registerUserDto.UserName;
             _registerUserDto.Birthday = registerUserDto.Birthday;
             _registerUserDto.Address= registerUserDto.Address;
-            _registerUserDto.Picture= registerUserDto.Photo;
-            _registerUserDto.Type = UserType.Customer;
+            _registerUserDto.Photo= registerUserDto.Photo;
+            _registerUserDto.Type = UserType.Seller;
             _registerUserDto.Veryfied = VeryfiedType.Denied;
 
             userModel = _mapper.Map<UserModel>(_registerUserDto);
@@ -169,9 +168,16 @@ namespace WebShopApi.Services
                 return false;
             }
 
-            user.Picture = path;
+            user.Photo = path;
             _dataContext.SaveChanges();
             return true;
+        }
+
+        public string getPhoto(int id)
+        {
+            UserModel user = _dataContext.Users.Find(id);
+            if (user.Photo == null) { return ""; }
+            return user.Photo;
         }
     }
 }

@@ -5,7 +5,8 @@ export class Product {
       Price=0,
       Quantity=1,
       Description="",
-      Image=""
+      Image="",
+      SellerId = 0,
       
     ) {
       this.id=Id;
@@ -14,6 +15,7 @@ export class Product {
       this.quantity=Quantity;
       this.description=Description;
       this.image=Image;
+      this.sellerId = SellerId;
     }
   }
   export default Product;

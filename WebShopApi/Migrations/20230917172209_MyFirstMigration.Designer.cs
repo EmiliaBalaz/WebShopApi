@@ -12,7 +12,7 @@ using WebShopApi.Data;
 namespace WebShopApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230915141452_MyFirstMigration")]
+    [Migration("20230917172209_MyFirstMigration")]
     partial class MyFirstMigration
     {
         /// <inheritdoc />
@@ -55,13 +55,31 @@ namespace WebShopApi.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("WebShopApi.Models.OrderProductModel", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderId", "Id");
+
+                    b.HasIndex("Id");
+
+                    b.ToTable("OrderProducts", (string)null);
+                });
+
             modelBuilder.Entity("WebShopApi.Models.ProductModel", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -79,9 +97,11 @@ namespace WebShopApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Quantity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SellerId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -95,9 +115,6 @@ namespace WebShopApi.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("AcceptedRegistration")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -122,7 +139,7 @@ namespace WebShopApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Picture")
+                    b.Property<string>("Photo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -139,6 +156,35 @@ namespace WebShopApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("WebShopApi.Models.OrderProductModel", b =>
+                {
+                    b.HasOne("WebShopApi.Models.ProductModel", "Product")
+                        .WithMany("Orders")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebShopApi.Models.OrderModel", "Order")
+                        .WithMany("OrderProducts")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("WebShopApi.Models.OrderModel", b =>
+                {
+                    b.Navigation("OrderProducts");
+                });
+
+            modelBuilder.Entity("WebShopApi.Models.ProductModel", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

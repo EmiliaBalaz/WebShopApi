@@ -5,6 +5,7 @@ import axios from 'axios';
 const EditProfile = ({ user, onSave, onCancel }) => {
   axios.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(sessionStorage["Token"])}`;
   const [updatedUser, setUpdatedUser] = useState(user);
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,6 +33,8 @@ const EditProfile = ({ user, onSave, onCancel }) => {
   const handleCancel = () => {
     onCancel();
   };
+
+
 
   return (
     <div className="change-profile-info">

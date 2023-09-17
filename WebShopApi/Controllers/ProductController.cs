@@ -29,19 +29,19 @@ namespace WebShopApi.Controllers
         }
 
         [HttpDelete("delete")]
-        public IActionResult DeleteProduct(long id)
+        public IActionResult DeleteProduct(int id)
         {
             return Ok(_productService.DeleteProduct(id));
         }
 
         [HttpPost("update")]
-        public IActionResult UpdateProduct(ProductDto product, long id)
+        public IActionResult UpdateProduct(ProductDto product, int id)
         {
             return Ok(_productService.UpdateProduct(product, id));
         }
 
         [HttpGet("find/{id}")]
-        public IActionResult FindById(long id)
+        public IActionResult FindById(int id)
         {
             return Ok(_productService.FindById(id));
         }

@@ -12,7 +12,7 @@ export class User {
       UserType=1,
       Veryfied,
     ) {
-      this.Id=Id;
+      this.id=Id;
       this.userName = UserName;
       this.password = Password;
       this.firstName = FirstName;

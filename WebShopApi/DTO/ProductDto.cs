@@ -10,10 +10,11 @@ namespace WebShopApi.DTO
         [Required(ErrorMessage = "The field with name {0} is required.")]
         public string Price { get; set; }
         [Required(ErrorMessage = "The field with name {0} is required.")]
-        public string Quantity { get; set; }
+        public int Quantity { get; set; }
         [Required(ErrorMessage = "The field with name {0} is required.")]
         public string Description { get; set; }
         [Required(ErrorMessage = "The field with name {0} is required.")]
         public string Image { get; set; }
+        public int SellerId { get; set; }
     }
 }

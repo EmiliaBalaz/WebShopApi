@@ -8,13 +8,13 @@ import User from '../Models/User.js'
     const decodedToken = jwtDecode(token);
 
     // Extract the claims from the decoded token
-    const {UserId, UserName, Password, FirstName, LastName,Birthday, Address,Email,Image,UserType, Veryfied} = decodedToken;
+    const {Id, UserName, Password, FirstName, LastName,Birthday, Address,Email,Photo,UserType, Veryfied} = decodedToken;
     var bool;
 
     
     // Create a new User object with the extracted claims
     const user = new User(
-      parseInt(UserId),
+      parseInt(Id),
       UserName,
       Password,
       FirstName,
@@ -22,7 +22,7 @@ import User from '../Models/User.js'
       Birthday,
       Address,
       Email, 
-      Image,
+      Photo,
       UserType,
       Veryfied,
     );

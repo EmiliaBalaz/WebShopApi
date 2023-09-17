@@ -31,18 +31,22 @@ const CustomersOrders = ({ chartItems,setChartItems, isLoggedIn }) => {
           };
 
             orderDate=moment().format();
-            const order = new Order(0, comment, address,price, orderDate, null, orderData.products);
-            console.log(order)
+            const newOrder = new Order(comment, address,price, orderDate, orderDate, orderData.products);
+            console.log(newOrder)
             axios.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(sessionStorage["Token"])}`;
-            const response = await axios.post('https://localhost:7042/api/Order/add', order);
-            if (response.data === 'ERROR')
+
+            try
             {
-                alert('SOMETHING IS WRONG WITH YOUR ORDER');
-            } 
-            else 
-            {
-                alert('Order Placed!');
+              await axios.post('https://localhost:7042/api/Order/addorder', newOrder);
             }
+            catch(error)
+            {
+              console.log(error);
+            }
+           
+            
+               
+            
 
             // Clear the chart items
             setChartItems([]);
