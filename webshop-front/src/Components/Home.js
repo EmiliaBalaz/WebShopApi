@@ -88,6 +88,7 @@ const Home = ({ isLoggedIn,setChartItems,chartItems }) => {
         <div className="fragrance-articles-rendered">
           {articles && articles.map((item) => (
             <div className="article-rendered" key={item.id}>
+              <img src={item.image} alt={item.name} />
               <h3>{item.name}</h3>
               <p>Price: ${item.price}</p>
               <button onClick={() => getProductDetails(item.id)}>View Details</button>
@@ -98,6 +99,7 @@ const Home = ({ isLoggedIn,setChartItems,chartItems }) => {
           <div className="product-details-overlay">
             <div className="product-details">
               <div className="product-info">
+              
                 <h3>{selectedProduct.name}</h3>
                 <p>Description: {selectedProduct.description}</p>
                 <p>Price: ${selectedProduct.price}</p>

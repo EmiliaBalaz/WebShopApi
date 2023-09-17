@@ -24,7 +24,7 @@ function App (){
   return(
     <Router>
       <nav className='navbar'>
-        <p className='myTitle'>Food delivery</p>
+        <p className='myTitle'>WebShop</p>
         <li className="nav-list">   
           <ul>
           <Link to="/home" className="nav-link">Home</Link>
@@ -48,7 +48,6 @@ function App (){
               (
                 <>
                 <Link to="/myProfile" className='spaceBetweenItems'>My profile</Link>
-                <Link to="/editProfile" className='spaceBetweenItems'>Edit profile</Link>
                 </>
               )
             }
