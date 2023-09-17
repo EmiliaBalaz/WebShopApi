@@ -28,7 +28,7 @@ const MyProfile = () => {
     useEffect(() => {
         const fetchUserProfileData = async () => {
           try {
-            const response = axios.get('https://localhost:7042/api/User/find?email='+user.userName + '%40gmail.com');
+            const response = axios.get('https://localhost:7042/api/User/find/'+user.id);
             console.log('change prof successful', response.data);
             return (await response).data
           } catch (error) {

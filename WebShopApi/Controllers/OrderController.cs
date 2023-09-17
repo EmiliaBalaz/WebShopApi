@@ -24,5 +24,11 @@ namespace WebShopApi.Controllers
             return Ok(_orderService.AddOrder(newOrder));
         }
 
+        [HttpGet("getcustomersorder/{id}")]
+        public IActionResult GetOrdersByCustomersId(int id)
+        {
+            return Ok(_orderService.GetOrdersByCustomersId(id));
+        }
+
     }
 }

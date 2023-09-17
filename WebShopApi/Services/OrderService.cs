@@ -58,6 +58,13 @@ namespace WebShopApi.Services
             return _mapper.Map<OrderDto>(order);
         }
 
+
+        public List<OrderDto> GetOrdersByCustomersId(int id)
+        {
+            List<OrderModel> listOfOrders = _dataContext.Orders.ToList().Where(o => o.CustomerId== id).ToList(); 
+            return _mapper.Map<List<OrderDto>>(listOfOrders);
+        }
+
         private void DecreaseQuantity(int id, int quantity)
         {
             ProductModel product = _dataContext.Products.Find(id);

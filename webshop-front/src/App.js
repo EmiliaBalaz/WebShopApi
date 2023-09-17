@@ -12,6 +12,7 @@ import MyProfile from './Components/MyProfile';
 import VerifySeller from './Components/VerifySeller';
 import Home from './Components/Home'
 import CustomersOrders from './Components/CustomersOrders';
+import CreateOrder from './Components/CreateOrder';
 
 
 function App (){
@@ -21,6 +22,15 @@ function App (){
     // Perform login logic and set isLoggedIn to true
     setIsLoggedIn(true);
   };
+
+  
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setChartItems([]);
+    sessionStorage.removeItem("User");
+
+  };
+
   return(
     <Router>
       <nav className='navbar'>
@@ -48,6 +58,7 @@ function App (){
               (
                 <>
                 <Link to="/myProfile" className='spaceBetweenItems'>My profile</Link>
+                <Link to="/logout" className='spaceBetweenItems' onClick={handleLogout}>Logout</Link>
                 </>
               )
             }
@@ -61,7 +72,8 @@ function App (){
             {isLoggedIn && PickRole().isCustomer===true &&
               (
                 <>
-                <Link to="/customersOrders" className='spaceBetweenItems'>Create order</Link>
+                <Link to="/createOrder" className='spaceBetweenItems'>Create order</Link>
+                <Link to ="/customersOrders" className='spaceBetweenItems'>My orders</Link>
                 </>
               )
             }
@@ -92,7 +104,13 @@ function App (){
         {
           isLoggedIn &&
           (
-            <Route path="/customersOrders" element={<CustomersOrders setChartItems={setChartItems} chartItems={chartItems} isLoggedIn={isLoggedIn}/>} />
+            <Route path="/createOrder" element={<CreateOrder setChartItems={setChartItems} chartItems={chartItems} isLoggedIn={isLoggedIn}/>} />
+          )
+        }
+        {
+          isLoggedIn &&
+          (
+            <Route path="/customersOrders" element={<CustomersOrders/>} />
           )
         }
       </Routes>

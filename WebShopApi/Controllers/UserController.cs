@@ -60,10 +60,10 @@ namespace WebShopApi.Controllers
             return Ok(_userService.DeleteUser(email));  
         }
 
-        [HttpGet("find")]
-        public IActionResult FindUser(string email)
+        [HttpGet("find/{id}")]
+        public IActionResult FindUser(int id)
         {
-            return Ok(_userService.FindById(email));
+            return Ok(_userService.FindById(id));
         }
 
         [HttpPost("addpicture"), DisableRequestSizeLimit]

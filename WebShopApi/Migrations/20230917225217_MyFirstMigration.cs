@@ -21,7 +21,8 @@ namespace WebShopApi.Migrations
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<int>(type: "int", nullable: false),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ShipmentDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ShipmentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -106,7 +106,7 @@ const Home = ({ isLoggedIn,setChartItems,chartItems }) => {
                 {isLoggedIn === true && PickRole().isCustomer === true && (
                   <>
                     <div className="quantity-picker">
-                    <button onClick={() => addToChart(selectedProduct)}>Add to Cart</button>
+                    <button onClick={() => addToChart(selectedProduct)}>Add</button>
                     </div>
                   </>
                 )}

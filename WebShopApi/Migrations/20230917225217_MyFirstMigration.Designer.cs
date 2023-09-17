@@ -12,7 +12,7 @@ using WebShopApi.Data;
 namespace WebShopApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230917172209_MyFirstMigration")]
+    [Migration("20230917225217_MyFirstMigration")]
     partial class MyFirstMigration
     {
         /// <inheritdoc />
@@ -40,6 +40,9 @@ namespace WebShopApi.Migrations
                     b.Property<string>("Comment")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");

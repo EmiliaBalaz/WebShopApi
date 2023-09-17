@@ -91,7 +91,7 @@ namespace WebShopApi.Services
             _registerUserDto.Birthday = registerUserDto.Birthday;
             _registerUserDto.Address= registerUserDto.Address;
             _registerUserDto.Photo= registerUserDto.Photo;
-            _registerUserDto.Type = UserType.Seller;
+            _registerUserDto.Type = UserType.Customer;
             _registerUserDto.Veryfied = VeryfiedType.Denied;
 
             userModel = _mapper.Map<UserModel>(_registerUserDto);
@@ -148,9 +148,9 @@ namespace WebShopApi.Services
             return true;
         }
 
-        public UserDto FindById(string email)
+        public UserDto FindById(int id)
         {
-            var user = _dataContext.Users.FirstOrDefault(u => u.Email == email);
+            var user = _dataContext.Users.FirstOrDefault(u => u.Id == id);
             if(user is null)
             {
                 return null;

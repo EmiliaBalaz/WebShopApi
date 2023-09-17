@@ -51,5 +51,11 @@ namespace WebShopApi.Controllers
         {
             return Ok(_productService.GetAllProducts());
         }
+
+        [HttpGet("getproductbyorderid/{id}")]
+        public IActionResult GetProductByOrderId(int orderId)
+        {
+            return Ok(_productService.GetProductsByOrderId(orderId));
+        }
     }
 }

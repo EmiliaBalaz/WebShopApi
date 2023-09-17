@@ -73,5 +73,11 @@ namespace WebShopApi.Services
 
             return listOfProducts;
         }
+
+        public List<ProductDto> GetProductsByOrderId(int orderId)
+        {
+            List<ProductModel> products = _dataContext.Products.Where(p => p.Orders.Any(o => o.OrderId == orderId)).ToList();
+            return _mapper.Map<List<ProductDto>>(products);
+        }
     }
 }

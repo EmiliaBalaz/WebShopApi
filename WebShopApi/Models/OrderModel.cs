@@ -11,6 +11,7 @@ namespace WebShopApi.Models
         public int Price { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime ShipmentDate { get; set; }
+        public int CustomerId { get; set; }
         public List<OrderProductModel> OrderProducts { get; set; }
     }
 }
