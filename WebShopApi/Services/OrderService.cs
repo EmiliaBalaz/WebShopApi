@@ -48,6 +48,7 @@ namespace WebShopApi.Services
             order.Comment= newOrder.Comment;
             order.ShipmentDate = randomTime;
             order.OrderProducts = orderProducts;
+            order.CustomerId = newOrder.CustomerId;
             foreach (OrderProductModel op in orderProducts)
             {
                 op.Order = order;
@@ -63,6 +64,12 @@ namespace WebShopApi.Services
         {
             List<OrderModel> listOfOrders = _dataContext.Orders.ToList().Where(o => o.CustomerId== id).ToList(); 
             return _mapper.Map<List<OrderDto>>(listOfOrders);
+        }
+
+        public List<OrderDto> GetOrdersSellers(int sellerId)
+        {
+            List<OrderModel> orders = _dataContext.Orders.Where(o=>o.OrderProducts.Any(p=>p.Product.SellerId==sellerId)).ToList();
+            return _mapper.Map<List<OrderDto>>(orders);
         }
 
         private void DecreaseQuantity(int id, int quantity)

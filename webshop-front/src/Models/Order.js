@@ -7,6 +7,7 @@ export class Order {
       Price=0,
       OrderDate=null,
       ShipmentDate=null,
+      CustomerId = 0,
       Products=[],
       
     ) {
@@ -15,6 +16,7 @@ export class Order {
       this.price=Price;
       this.orderDate=OrderDate;
       this.shipmentDate=ShipmentDate;
+      this.customerId = CustomerId;
       this.products=Products;
     }
   }

@@ -13,6 +13,7 @@ import VerifySeller from './Components/VerifySeller';
 import Home from './Components/Home'
 import CustomersOrders from './Components/CustomersOrders';
 import CreateOrder from './Components/CreateOrder';
+import SellersOrders from './Components/SellersOrders';
 
 
 function App (){
@@ -50,6 +51,7 @@ function App (){
               (
                 <>
                 <Link to="/addProduct" className='spaceBetweenItems'>Add product</Link>
+                <Link to="/sellersOrders" className='spaceBetweenItems'>Sellers orders</Link>
                 </>
               )
             }
@@ -111,6 +113,12 @@ function App (){
           isLoggedIn &&
           (
             <Route path="/customersOrders" element={<CustomersOrders/>} />
+          )
+        }
+        {
+          isLoggedIn &&
+          (
+            <Route path="/sellersOrders" element={<SellersOrders/>} />
           )
         }
       </Routes>
