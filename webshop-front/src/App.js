@@ -14,6 +14,8 @@ import Home from './Components/Home'
 import CustomersOrders from './Components/CustomersOrders';
 import CreateOrder from './Components/CreateOrder';
 import SellersOrders from './Components/SellersOrders';
+import ActivateOrders from './Components/ActivateOrders';
+import AllOrders from './Components/AllOrders';
 
 
 function App (){
@@ -52,6 +54,7 @@ function App (){
                 <>
                 <Link to="/addProduct" className='spaceBetweenItems'>Add product</Link>
                 <Link to="/sellersOrders" className='spaceBetweenItems'>Sellers orders</Link>
+                <Link to="/showMyProducts" className='spaceBetweenItems'>Sellers products</Link>
                 </>
               )
             }
@@ -68,6 +71,7 @@ function App (){
               (
                 <>
                 <Link to="/verifySeller" className='spaceBetweenItems'>Verify seller</Link>
+                <Link to ="/allOrders" className='spaceBetweenItems'>All orders</Link>
                 </>
               )
             }
@@ -76,6 +80,7 @@ function App (){
                 <>
                 <Link to="/createOrder" className='spaceBetweenItems'>Create order</Link>
                 <Link to ="/customersOrders" className='spaceBetweenItems'>My orders</Link>
+                <Link to ="/activeOrder" className='spaceBetweenItems'>Active orders</Link>
                 </>
               )
             }
@@ -119,6 +124,24 @@ function App (){
           isLoggedIn &&
           (
             <Route path="/sellersOrders" element={<SellersOrders/>} />
+          )
+        }
+         {
+          isLoggedIn &&
+          (
+            <Route path="/showMyProducts" element={<ShowMyProducts/>} />
+          )
+        }
+        {
+          isLoggedIn &&
+          (
+            <Route path="/activeOrder" element={<ActivateOrders/>} />
+          )
+        }
+        {
+          isLoggedIn &&
+          (
+            <Route path="/allOrders" element={<AllOrders/>} />
           )
         }
       </Routes>

@@ -4,7 +4,7 @@ import moment from 'moment';
 import './Styles/CustomersOrders.css';
 
 
-const CustomersOrders = () => {
+const AllOrders = () => {
   axios.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(sessionStorage["Token"])}`;
   const user = JSON.parse(sessionStorage['User']);
   const id = parseInt(user.id);
@@ -18,7 +18,7 @@ const CustomersOrders = () => {
   const fetchOrderHistory = async () => {
     try {
       axios.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(sessionStorage["Token"])}`;
-      const response = await axios.get('https://localhost:7042/api/Order/getcustomersorder/' + id);
+      const response = await axios.get('https://localhost:7042/api/Order/getall');
       setOrderHistory(response.data);
       console.log(response.data);
     } catch (error) {
@@ -51,4 +51,4 @@ const CustomersOrders = () => {
   );
 };
 
-export default CustomersOrders;
+export default AllOrders;

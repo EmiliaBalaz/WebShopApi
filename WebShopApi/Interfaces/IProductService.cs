@@ -10,7 +10,7 @@ namespace WebShopApi.Interfaces
         public bool UpdateProduct(ProductDto product, int id);
         ProductDto FindById(int id);
         List<ProductDto> GetAllProducts();
-
         List<ProductDto> GetProductsByOrderId(int orderId);
+        List<ProductDto> GetAllSellersProduct(int sellerId);
     }
 }

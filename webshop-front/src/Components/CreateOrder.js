@@ -31,7 +31,7 @@ const CreateOrder = ({ chartItems,setChartItems, isLoggedIn }) => {
           };
 
             orderDate=moment().format();
-            const newOrder = new Order(comment, address,price, orderDate, orderDate, user.id, orderData.products);
+            const newOrder = new Order(comment, address,price, orderDate, null, user.id, orderData.products);
             console.log(newOrder)
             axios.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(sessionStorage["Token"])}`;
 

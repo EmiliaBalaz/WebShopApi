@@ -35,5 +35,24 @@ namespace WebShopApi.Controllers
         {
             return Ok(_orderService.GetOrdersSellers(id));
         }
+
+        
+
+        [HttpDelete("deleteorder/{id}")]
+        public IActionResult DeleteOrder(int id)
+        {
+            var result = _orderService.DeleteOrder(id);
+            if (result is false)
+            {
+                return BadRequest("Delete order is failed");
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("getall")]
+        public IActionResult GetAllOrders()
+        {
+            return Ok(_orderService.GetAllOrders());
+        }
     }
 }

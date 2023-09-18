@@ -16,7 +16,7 @@ const user = JSON.parse(sessionStorage["User"]);
   const fetchArticlesS = async () => {
     try {
       axios.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(sessionStorage["Token"])}`;
-      const response = await axios.get('https://localhost:7042/api/Product/getall');
+      const response = await axios.get('https://localhost:7042/api/Product/getallsellersproduct/' + user.id);
       setArticles(response.data);
     } catch (error) {
       console.error(error);
@@ -30,10 +30,10 @@ const user = JSON.parse(sessionStorage["User"]);
       <div className="fragrance-articles-renderedd">
         {articles.map((article) => (
           <div className="article-rendered" key={article.productId}>
+            <img src={article.image} alt={article.name} />
             <h3>{article.name}</h3>
             <p>Price: ${article.price}</p>
             <p>Quantity: {article.quantity}</p>
-            <p>Image: {article.image}</p>
           </div>
         ))}
       </div>

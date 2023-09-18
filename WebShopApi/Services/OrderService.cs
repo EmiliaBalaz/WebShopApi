@@ -59,6 +59,38 @@ namespace WebShopApi.Services
             return _mapper.Map<OrderDto>(order);
         }
 
+        public bool DeleteOrder(int id)
+        {
+            OrderModel order = _dataContext.Orders.Find(id);
+            if(order is null)
+            {
+                return false;
+            }
+
+            //foreach (OrderProductModel orderProductModel in order.OrderProducts.ToList())
+            //{
+            //    ProductModel pm = _dataContext.Products.Find(orderProductModel.Id);
+            //    pm.Quantity += orderProductModel.Quantity;
+            //    _dataContext.Products.Update(pm);
+            //    _dataContext.SaveChanges();
+            //}
+
+            _dataContext.Remove(order);
+            _dataContext.SaveChanges(); 
+            return true;
+        }
+
+        public List<OrderDto> GetAllOrders()
+        {
+            List<OrderModel> orders = _dataContext.Orders.ToList();
+            return _mapper.Map<List<OrderDto>>(orders);
+        }
+
+        public List<OrderDto> GetCustomersOrders(int id)
+        {
+            List<OrderModel> orders = _dataContext.Orders.Where(x=>x.CustomerId == id).ToList();
+            return _mapper.Map<List<OrderDto>>(orders);
+        }
 
         public List<OrderDto> GetOrdersByCustomersId(int id)
         {
